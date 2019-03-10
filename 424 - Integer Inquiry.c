@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char str1[150],str2[150],str3[100000];
+    int i,j,l,l1,l2,sum,carry,a,b,temp=1;
+    while(1){
+        scanf("%s",str1);
+        if(!strcmp(str1,"0")){
+            break;
+        }
+        if(temp){
+            temp=0;
+            strcpy(str2,str1);
+            continue;
+        }
+        l1=strlen(str1);
+        l2=strlen(str2);
+        i=l1-1;
+        j=l2-1;
+        l=0;
+        carry=0;
+        while(i>=0||j>=0){
+            if(i>-1){
+                a=str1[i--]-'0';
+            }
+            else{
+                a=0;
+            }
+            if(j>-1){
+                b=str2[j--]-'0';
+            }
+            else{
+                b=0;
+            }
+            sum=a+b+carry;
+            carry=sum/10;
+            str3[l++]=(sum%10)+'0';
+        }
+        if(carry!=0){
+            str3[l]=carry+'0';
+        }
+        else{
+            l--;
+        }
+        for(i=l,j=0;i>=0;i--,j++){
+            str2[j]=str3[i];
+        }
+        str2[j]='\0';
+    }
+    printf("%s\n",str2);
+    return 0;
+}
